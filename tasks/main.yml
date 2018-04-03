@@ -1,0 +1,17 @@
+---
+
+- name: Download Node.js Yum Repo Setup Script
+  get_url:
+    url="https://rpm.nodesource.com/setup_8.x"
+    dest=/root/setup_8.x
+    mode=700
+
+- name: Add Node.js Repository
+  command: /root/setup_8.x
+  args:
+    creates: /etc/yum.repos.d/nodesource-el7.repo
+
+- name: Install Node.js
+  yum:
+    name: nodejs
+    state: present
